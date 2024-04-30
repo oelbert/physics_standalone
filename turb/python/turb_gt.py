@@ -36,717 +36,599 @@ class Turbulence:
         xkzm_s,
     ):
 
-       # *** Multi-dimensional storages ***
+        # *** Multi-dimensional storages ***
         self._qcko = gt_storage.zeros(
             backend=backend,
             dtype=(DTYPE_FLT, (ntrac,)),
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._qcdo = gt_storage.zeros(
             backend=backend,
             dtype=(DTYPE_FLT,(ntrac,)),
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._f2 = gt_storage.zeros(
             backend=backend,
             dtype=(DTYPE_FLT,(ntrac-1,)),
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._q1 = gt_storage.zeros(
             backend=backend,
             dtype=(DTYPE_FLT,(ntrac,)),
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._rtg_gt = gt_storage.zeros(
             backend=backend,
             dtype=(DTYPE_FLT,(ntrac,)),
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         # *** 3D storages ***
         self._zi = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._zl = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._zm = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._ckz = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._chz = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._tke = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._rdzt = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._prn = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xkzo = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xkzmo = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._pix = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._theta = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._qlx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._slx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._thvx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._qtx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._thlx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._thlvx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._svx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._thetae = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._gotvx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._plyr = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._cfly = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._bf = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._dku = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._dkt = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._dkq = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._radx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._shr2 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._tcko = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._tcdo = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._ucko = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._ucdo = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._vcko = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._vcdo = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._buou = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xmf = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xlamue = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._rhly = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._qstl = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._buod = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xmfd = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xlamde = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._rlam = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._ele = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._elm = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._prod = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._rle = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._diss = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._ad = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._f1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._al = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._au = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._wd2 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._thld = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._qtd = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xlamdem = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._wu2 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._qtu = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._xlamuem = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._thlu = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         # 1D GT storages extended into 2D
         self._f1_p1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._f2_p1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._ad_p1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._thlvx_0 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._gdx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._kx1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._kpblx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._kpblx_mfp = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._hpblx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._hpblx_mfp = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._pblflg = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_BOOL,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._sfcflg = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_BOOL,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._pcnvflg = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_BOOL,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._scuflg = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_BOOL,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._radmin = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._mrad = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._krad = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._lcld = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._kcld = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._flg = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_BOOL,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._rbup = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._rbdn = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._sflux = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._thermal = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._crb = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._dtdz1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
         self._ustar = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._zol = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._phim = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._phih = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._vpert = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._radj = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._zlup = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._zldn = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._bsum = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._mlenflg = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_BOOL,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._thvx_k = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._tke_k = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._hrad = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._krad1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._thlvd = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._ra1 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._ra2 = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._mradx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._mrady = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._sumx = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._xlamavg = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._scaldfunc = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._kpbly = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._kpbly_mfp = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         self._zm_mrad = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_FLT,
             shape=(im, 1),
-            default_origin=(0, 0, 0),
         )
         # Mask/Index Array
         self._mask = gt_storage.zeros(
             backend=backend,
             dtype=DTYPE_INT,
             shape=(im, 1, km + 1),
-            default_origin=(0, 0, 0),
         )
 
         mask_init(mask=self._mask)
@@ -862,13 +744,13 @@ class Turbulence:
         self._garea = numpy_to_gt4py_storage_1D(garea, backend, self._km + 1)
         self._tx1 = numpy_to_gt4py_storage_1D(1.0 / prsi[:, 0], backend, self._km + 1)
         self._tx2 = numpy_to_gt4py_storage_1D(1.0 / prsi[:, 0], backend, self._km + 1)
-        self._kinver = numpy_to_gt4py_storage_1D(kinver, backend, self._km + 1)
+        self._kinver = numpy_to_gt4py_storage_1D(kinver, backend, self._km + 1, dtype=np.int32)
         self._zorl = numpy_to_gt4py_storage_1D(zorl, backend, self._km + 1)
         self._dusfc = numpy_to_gt4py_storage_1D(dusfc, backend, self._km + 1)
         self._dvsfc = numpy_to_gt4py_storage_1D(dvsfc, backend, self._km + 1)
         self._dtsfc = numpy_to_gt4py_storage_1D(dtsfc, backend, self._km + 1)
         self._dqsfc = numpy_to_gt4py_storage_1D(dqsfc, backend, self._km + 1)
-        self._kpbl = numpy_to_gt4py_storage_1D(kpbl, backend, self._km + 1)
+        self._kpbl = numpy_to_gt4py_storage_1D(kpbl, backend, self._km + 1, dtype=np.int32)
         self._hpbl = numpy_to_gt4py_storage_1D(hpbl, backend, self._km + 1)
         self._rbsoil = numpy_to_gt4py_storage_1D(rbsoil, backend, self._km + 1)
         self._evap = numpy_to_gt4py_storage_1D(evap, backend, self._km + 1)
@@ -1104,7 +986,6 @@ class Turbulence:
 
         mass_flux_comp(
             pcnvflg=self._pcnvflg,
-            q1=self._q1,
             scuflg=self._scuflg,
             t1=self._t1,
             tcdo=self._tcdo,
@@ -1115,9 +996,16 @@ class Turbulence:
             v1=self._v1,
             vcdo=self._vcdo,
             vcko=self._vcko,
-            qcdo=self._qcdo,
-            qcko=self._qcko,
         )
+        for ii in range(8):
+            mass_flux_comp_tracer(
+                qcdo=self._qcdo,
+                qcko=self._qcko,
+                q1=self._q1,
+                pcnvflg=self._pcnvflg,
+                scuflg=self._scuflg,
+                ii=ii,
+            )
 
         self._kpbl, self._hpbl, self._buou, self._xmf, \
         self._tcko, self._qcko, self._ucko, self._vcko, \
@@ -1371,14 +1259,13 @@ class Turbulence:
             zol=self._zol,
             domain=(self._im, 1, self._km),
         )
-
-        predict_tke(diss=self._diss, 
-              prod=self._prod, 
-              rle=self._rle, 
-              tke=self._tke, 
-              dtn=self._dtn, 
-              kk=self._kk, 
-              domain=(self._im, 1, self._km1))
+        for n in range(self._kk):
+            predict_tke(diss=self._diss,
+                prod=self._prod,
+                rle=self._rle,
+                tke=self._tke,
+                dtn=self._dtn,
+                domain=(self._im, 1, self._km1))
 
         tke_up_down_prop(
             pcnvflg=self._pcnvflg,
@@ -1443,10 +1330,17 @@ class Turbulence:
             heat=self._heat,
             t1=self._t1,
             rdt=self._rdt,
-            ntrac1=self._ntrac1,
             ntke=self._ntke,
             domain=(self._im, 1, self._km),
         )
+        if self._ntrac1 >= 2:
+            for kk in range(1, self._ntrac1):
+                part12a_trac(
+                    f2=self._f2,
+                    q1=self._q1,
+                    kk=kk,
+                    domain=(self._im, 1, self._km),
+                )
 
         heat_moist_tridiag_mat_ele_comp(
             ad=self._ad,
@@ -1481,53 +1375,65 @@ class Turbulence:
         )
 
         if self._ntrac1 >= 2:
-            part13a(
-                pcnvflg=self._pcnvflg,
-                mask=self._mask,
-                kpbl=self._kpbl,
-                del_=self._del_,
-                prsl=self._prsl,
-                rdzt=self._rdzt,
-                xmf=self._xmf,
-                qcko=self._qcko,
-                q1=self._q1,
-                f2=self._f2,
-                scuflg=self._scuflg,
-                mrad=self._mrad,
-                krad=self._krad,
-                xmfd=self._xmfd,
-                qcdo=self._qcdo,
-                ntrac1=self._ntrac1,
-                dt2=self._dt2,
-                domain=(self._im, 1, self._km)
-            )
-        tridin(cl=self._al,
-           cm=self._ad,
-           cu=self._au,
-           r1=self._f1,
-           r2=self._f2,
-           au=self._au,
-           a1=self._f1,
-           a2=self._f2,
-           nt=self._ntrac1,
-           domain =(self._im, 1, self._km))
+            for ii in range(1, self._ntrac1):
+                part13a(
+                    pcnvflg=self._pcnvflg,
+                    mask=self._mask,
+                    kpbl=self._kpbl,
+                    del_=self._del_,
+                    prsl=self._prsl,
+                    rdzt=self._rdzt,
+                    xmf=self._xmf,
+                    qcko=self._qcko,
+                    q1=self._q1,
+                    f2=self._f2,
+                    scuflg=self._scuflg,
+                    mrad=self._mrad,
+                    krad=self._krad,
+                    xmfd=self._xmfd,
+                    qcdo=self._qcdo,
+                    dt2=self._dt2,
+                    ii=ii,
+                    domain=(self._im, 1, self._km)
+                )
+        for n0 in range(self._ntrac1):
+            tridin(cl=self._al,
+            cm=self._ad,
+            cu=self._au,
+            r1=self._f1,
+            r2=self._f2,
+            au=self._au,
+            a1=self._f1,
+            a2=self._f2,
+            n=n0,
+            domain =(self._im, 1, self._km))
 
-        part13b(
-            f1=self._f1,
-            t1=self._t1,
-            f2=self._f2,
-            q1=self._q1,
-            tdt=self._tdt,
-            rtg=self._rtg_gt,
-            dtsfc=self._dtsfc,
-            del_=self._del_,
-            dqsfc=self._dqsfc,
-            conq=self._conq,
-            cont=self._cont,
-            rdt=self._rdt,
-            ntrac1=self._ntrac1,
-            domain=(self._im,1,self._km)
-        )
+        for ii in range(self._ntrac1):
+            part13b(
+                f1=self._f1,
+                t1=self._t1,
+                f2=self._f2,
+                q1=self._q1,
+                tdt=self._tdt,
+                rtg=self._rtg_gt,
+                rdt=self._rdt,
+                ii=ii,
+                domain=(self._im,1,self._km)
+            )
+
+        part13c(
+                dtsfc=self._dtsfc,
+                del_=self._del_,
+                dqsfc=self._dqsfc,
+                f1=self._f1,
+                t1=self._t1,
+                f2=self._f2,
+                q1=self._q1,
+                conq=self._conq,
+                cont=self._cont,
+                rdt=self._rdt,
+                domain=(self._im,1,self._km)
+            )
 
         moment_tridiag_mat_ele_comp(
             ad=self._ad,
@@ -1617,7 +1523,7 @@ class Turbulence:
 
         return dv, du, tdt, rtg, kpbl, dusfc, dvsfc, dtsfc, dqsfc, hpbl
 
-def numpy_to_gt4py_storage_2D(arr, backend, k_depth):
+def numpy_to_gt4py_storage_2D(arr, backend, k_depth, dtype=np.float64):
     """convert numpy storage to gt4py storage"""
     data = np.reshape(arr, (arr.shape[0], 1, arr.shape[1]))
     if data.dtype == "bool":
@@ -1626,17 +1532,17 @@ def numpy_to_gt4py_storage_2D(arr, backend, k_depth):
     if arr.shape[1] < k_depth:
         Z = np.zeros((arr.shape[0], 1, k_depth - arr.shape[1]))
         data = np.dstack((data, Z))
-    return gt_storage.from_array(data, backend=backend, default_origin=(0, 0, 0))
+    return gt_storage.from_array(data, backend=backend, dtype=dtype)
 
 
-def numpy_to_gt4py_storage_1D(arr, backend, k_depth):
+def numpy_to_gt4py_storage_1D(arr, backend, k_depth, dtype=np.float64):
     """convert numpy storage to gt4py storage"""
     data = np.reshape(arr, (arr.shape[0], 1))
     if data.dtype == "bool":
         data = data.astype(np.int32)
     # Replicate 2D array in z direction "k_depth" number of times
     # data = np.repeat(data[:, :, np.newaxis], k_depth, axis=2)
-    return gt_storage.from_array(data, backend=backend, default_origin=(0, 0, 0))
+    return gt_storage.from_array(data, backend=backend, dtype=dtype)
 
 
 def storage_to_numpy(gt_storage, array_dim):

@@ -74,12 +74,11 @@ ENV PYTHONPATH=/usr/local/serialbox/python
 
 # install gt4py
 RUN cd /
-RUN git clone -b v36 https://github.com/ai2cm/gt4py.git
-RUN pip install ./gt4py && \
-    python -m gt4py.gt_src_manager install -m 1
+RUN git clone -b hotfix/BinOp_fields https://github.com/oelbert/gt4py.git
+RUN pip install -e ./gt4py 
 
 # install some python packages
-RUN pip install numpy xarray[complete]
+RUN pip install numpy xarray
 
 # add default user
 ARG USER=user

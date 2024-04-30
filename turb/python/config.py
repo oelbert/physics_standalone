@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from gt4py import gtscript
+from gt4py.cartesian import gtscript
 
 prefix = "satmedmfvdif"
 BACKEND = str(os.getenv("BACKEND")) if ("BACKEND" in os.environ) else "gtc:gt:cpu_ifirst"
