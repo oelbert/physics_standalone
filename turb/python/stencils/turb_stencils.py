@@ -1097,7 +1097,7 @@ def part12a(
     f1: FIELD_FLT,
     q1: FIELD_FLT_8,
     ad: FIELD_FLT,
-    f2: FIELD_FLT_8,
+    f2: FIELD_FLT_7,
     dtdz1: FIELD_FLT,
     evap: FIELD_FLT_IJ,
     heat: FIELD_FLT_IJ,
@@ -1117,7 +1117,7 @@ def part12a(
 
 @gtscript.stencil(backend=backend)
 def part12a_trac(
-    f2: FIELD_FLT_8,
+    f2: FIELD_FLT_7,
     q1: FIELD_FLT_8,
     kk: int,
 ):
@@ -1280,7 +1280,7 @@ def part13a(
     xmf: FIELD_FLT,
     qcko: FIELD_FLT_8,
     q1: FIELD_FLT_8,
-    f2: FIELD_FLT_8,
+    f2: FIELD_FLT_7,
     scuflg: FIELD_BOOL_IJ,
     mrad: FIELD_INT_IJ,
     krad: FIELD_INT_IJ,
@@ -1289,35 +1289,67 @@ def part13a(
     dt2: float,
     ii: int,
 ):
-    with computation(FORWARD), interval(0, -1):
-        if mask[0, 0, 0] > 0:
-            if pcnvflg[0, 0] and mask[0, 0, -1] < kpbl[0, 0]:
-                dtodsu = dt2 / del_[0, 0, 0]
-                dsig = prsl[0, 0, -1] - prsl[0, 0, 0]
-                tem = dsig * rdzt[0, 0, -1]
-                ptem = 0.5 * tem * xmf[0, 0, -1]
-                ptem2 = dtodsu * ptem
-                tem1 = qcko[0, 0, -1][ii] + qcko[0, 0, 0][ii]
-                tem2 = q1[0, 0, -1][ii] + q1[0, 0, 0][ii]
-                f2[0, 0, 0] = q1[0, 0, 0][ii] + (tem1 - tem2) * ptem2
-            else:
-                f2[0, 0, 0] = q1[0, 0, 0][ii]
+    with computation(FORWARD), interval(0, 1):
+        if pcnvflg[0, 0] and mask[0, 0, 0] < kpbl[0, 0]:
+            dtodsd = dt2 / del_[0, 0, 0]
+            dtodsu = dt2 / del_[0, 0, 1]
+            dsig = prsl[0, 0, 0] - prsl[0, 0, 1]
+            tem = dsig * rdzt[0, 0, 0]
+            ptem = 0.5 * tem * xmf[0, 0, 0]
+            ptem1 = dtodsd * ptem
+            ptem2 = dtodsu * ptem
+            tem1 = qcko[0, 0, 0][ii] + qcko[0, 0, 1][ii]
+            tem2 = q1[0, 0, 0][ii] + q1[0, 0, 1][ii]
+            f2[0, 0, 0][ii] = f2[0, 0, 0][ii] - (tem1 - tem2) * ptem1
+        else:
+            f2[0, 0, 0][ii] = f2[0, 0, 0][ii]
 
-            if (
-                scuflg[0, 0]
-                and mask[0, 0, -1] >= mrad[0, 0]
-                and mask[0, 0, -1] < krad[0, 0]
-            ):
-                dtodsu = dt2 / del_[0, 0, 0]
-                dsig = prsl[0, 0, -1] - prsl[0, 0, 0]
-                tem = dsig * rdzt[0, 0, -1]
-                ptem = 0.5 * tem * xmfd[0, 0, -1]
-                ptem2 = dtodsu * ptem
-                tem1 = qcdo[0, 0, -1][ii] + qcdo[0, 0, 0][ii]
-                tem2 = q1[0, 0, -1][ii] + q1[0, 0, 0][ii]
-                f2[0, 0, 0][ii] = f2[0, 0, 0][ii] - (tem1 - tem2) * ptem2
-            else:
-                f2[0, 0, 0][ii] = f2[0, 0, 0][ii]
+        if (
+            scuflg[0, 0]
+            and mask[0, 0, 0] >= mrad[0, 0]
+            and mask[0, 0, 0] < krad[0, 0]
+        ):
+            dtodsd = dt2 / del_[0, 0, 0]
+            dtodsu = dt2 / del_[0, 0, 1]
+            dsig = prsl[0, 0, 0] - prsl[0, 0, 1]
+            tem = dsig * rdzt[0, 0, 0]
+            ptem = 0.5 * tem * xmfd[0, 0, 0]
+            ptem1 = dtodsd * ptem
+            ptem2 = dtodsu * ptem
+            tem1 = qcdo[0, 0, 0][ii] + qcdo[0, 0, 1][ii]
+            tem2 = q1[0, 0, 0][ii] + q1[0, 0, 1][ii]
+            f2[0, 0, 0][ii] = f2[0, 0, 0][ii] + (tem1 - tem2) * ptem1
+        else:
+            f2[0, 0, 0][ii] = f2[0, 0, 0][ii]
+        
+    with computation(FORWARD), interval(1, -1):
+        if pcnvflg[0, 0] and mask[0, 0, -1] < kpbl[0, 0]:
+            dtodsu = dt2 / del_[0, 0, 0]
+            dsig = prsl[0, 0, -1] - prsl[0, 0, 0]
+            tem = dsig * rdzt[0, 0, -1]
+            ptem = 0.5 * tem * xmf[0, 0, -1]
+            ptem2 = dtodsu * ptem
+            tem1 = qcko[0, 0, -1][ii] + qcko[0, 0, 0][ii]
+            tem2 = q1[0, 0, -1][ii] + q1[0, 0, 0][ii]
+            f2[0, 0, 0][ii] = q1[0, 0, 0][ii] + (tem1 - tem2) * ptem2
+        else:
+            f2[0, 0, 0][ii] = q1[0, 0, 0][ii]
+
+        if (
+            scuflg[0, 0]
+            and mask[0, 0, -1] >= mrad[0, 0]
+            and mask[0, 0, -1] < krad[0, 0]
+        ):
+            dtodsu = dt2 / del_[0, 0, 0]
+            dsig = prsl[0, 0, -1] - prsl[0, 0, 0]
+            tem = dsig * rdzt[0, 0, -1]
+            ptem = 0.5 * tem * xmfd[0, 0, -1]
+            ptem2 = dtodsu * ptem
+            tem1 = qcdo[0, 0, -1][ii] + qcdo[0, 0, 0][ii]
+            tem2 = q1[0, 0, -1][ii] + q1[0, 0, 0][ii]
+            f2[0, 0, 0][ii] = f2[0, 0, 0][ii] - (tem1 - tem2) * ptem2
+        else:
+            f2[0, 0, 0][ii] = f2[0, 0, 0][ii]
 
         if pcnvflg[0, 0] and mask[0, 0, 0] < kpbl[0, 0]:
             dtodsd = dt2 / del_[0, 0, 0]
@@ -1369,7 +1401,7 @@ def part13a(
 def part13b(
     f1: FIELD_FLT,
     t1: FIELD_FLT,
-    f2: FIELD_FLT_8,
+    f2: FIELD_FLT_7,
     q1: FIELD_FLT_8,
     tdt: FIELD_FLT,
     rtg: FIELD_FLT_8,
@@ -1388,7 +1420,7 @@ def part13c(
     dqsfc: FIELD_FLT_IJ,
     f1: FIELD_FLT,
     t1: FIELD_FLT,
-    f2: FIELD_FLT_8,
+    f2: FIELD_FLT_7,
     q1: FIELD_FLT_8,
     conq: float,
     cont: float,
@@ -2969,10 +3001,10 @@ def tridin(
     cm: FIELD_FLT,
     cu: FIELD_FLT,
     r1: FIELD_FLT,
-    r2: FIELD_FLT_8,
+    r2: FIELD_FLT_7,
     au: FIELD_FLT,
     a1: FIELD_FLT,
-    a2: FIELD_FLT_8,
+    a2: FIELD_FLT_7,
     n: int,
 ):
     with computation(FORWARD):
@@ -2980,7 +3012,7 @@ def tridin(
             fk = 1.0 / cm[0, 0, 0]
             au = fk * cu[0, 0, 0]
             a1 = fk * r1[0, 0, 0]
-            a2[0, 0, 0] = fk * r2[0, 0, 0][n]
+            a2[0, 0, 0][n] = fk * r2[0, 0, 0][n]
 
         with interval(1, -1):
             fkk = 1.0 / (cm[0, 0, 0] - cl[0, 0, -1] * au[0, 0, -1])
@@ -3095,7 +3127,7 @@ def comp_asym_mix_dn(
     fv: float,
     k: int,
 ):
-    with computation(BACKWARD), interval(...):
+    with computation(BACKWARD), interval(1, None):
         if mask[0, 0, 0] == k:
             mlenflg = True
             bsum = 0.0

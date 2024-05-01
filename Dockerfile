@@ -78,7 +78,8 @@ RUN git clone -b hotfix/BinOp_fields https://github.com/oelbert/gt4py.git
 RUN pip install -e ./gt4py 
 
 # install some python packages
-RUN pip install numpy xarray
+RUN pip install numpy==1.23.3
+RUN pip install xarray
 
 # add default user
 ARG USER=user
