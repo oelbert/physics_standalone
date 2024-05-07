@@ -956,8 +956,6 @@ def tke_up_down_prop(
     krad: FIELD_INT_IJ,
     mrad: FIELD_INT_IJ,
     xlamde: FIELD_FLT,
-    kmpbl: int,
-    kmscu: int,
 ):
 
     with computation(PARALLEL), interval(...):
@@ -967,7 +965,7 @@ def tke_up_down_prop(
             qcdo[0, 0, 0][7] = tke[0, 0, 0]
 
     with computation(FORWARD), interval(1, None):
-        if mask[0, 0, 0] < kmpbl:
+        if mask[0, 0, 0] < kpbl:
             tem = 0.5 * xlamue[0, 0, -1] * (zl[0, 0, 0] - zl[0, 0, -1])
             if pcnvflg[0, 0] and mask[0, 0, 0] <= kpbl[0, 0]:
                 qcko[0, 0, 0][7] = (
@@ -976,7 +974,7 @@ def tke_up_down_prop(
                 ) / (1.0 + tem)
 
     with computation(BACKWARD), interval(...):
-        if mask[0, 0, 0] < kmscu:
+        if mask[0, 0, 0] < krad:
             tem = 0.5 * xlamde[0, 0, 0] * (zl[0, 0, 1] - zl[0, 0, 0])
             if (
                 scuflg[0, 0]
@@ -988,7 +986,7 @@ def tke_up_down_prop(
                 ) / (1.0 + tem)
 
     with computation(PARALLEL), interval(0, 1):
-        if mask[0, 0, 0] < kmscu:
+        if mask[0, 0, 0] < krad:
             ad = 1.0
             f1 = tke[0, 0, 0]
 

@@ -1282,8 +1282,6 @@ class Turbulence:
             krad=self._krad,
             mrad=self._mrad,
             xlamde=self._xlamde,
-            kmpbl=self._kmpbl,
-            kmscu=self._kmscu,
             domain=(self._im, 1, self._km),
         )
 
